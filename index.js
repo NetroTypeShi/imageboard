@@ -28,6 +28,7 @@ const sessionConfig = {
     }
 }
 
+
 app.use(session(sessionConfig));
 
 const env = nunjucks.configure("views", {
@@ -38,6 +39,7 @@ const env = nunjucks.configure("views", {
 app.set("view engine", "njk")
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static("public"));
 
 import usersRouter from "./routes/users.js";
 import pagesRouter from "./routes/pages.js";

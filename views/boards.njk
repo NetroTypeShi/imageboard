@@ -1,8 +1,12 @@
-<ul>
+{# filepath: c:\Users\NETRO\Documents\GitHub\imageboard\views\boards.njk #}
+<h2>Tablones</h2>
+<div class="boards-list">
   {% for board in boards %}
-    <li>
-      <a href="/boards/{{ board.id }}">{{ board.name }}</a>
-    </li>
+    <a class="board-link" href="/boards/{{ board.id }}">
+      <div class="board-card">
+        <span class="board-title">#{{ board.name }}</span>
+      </div>
+    </a>
   {% endfor %}
-</ul>
+</div>
 

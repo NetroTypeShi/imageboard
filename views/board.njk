@@ -1,17 +1,23 @@
 {% if board %}
-    <h2>{{ board.name }}</h2>
-    <form action="/boards/{{ board.id }}/posts" method="POST">
+    <h2 class="board-header">{{ board.name }}</h2>
+    <form class="post-form" action="/boards/{{ board.id }}/posts" method="POST">
         <input type="text" name="title" placeholder="Título del post" required>
         <textarea name="content" placeholder="Contenido" required></textarea>
         <button type="submit">Crear post</button>
     </form>
 {% endif %}
 
+{% if posts.length == 0 %}
+    <div class="no-posts">No hay posts en este tablón todavía.</div>
+{% endif %}
+
 {% for post in posts %}
     <div class="post">
-        <p><strong>{{ post.title }}</strong></p>
-        <p>{{ post.content }}</p>
-        <p>Creado por: {{ post.user.username }}</p>
+        <div class="post-header">
+            <span class="post-title">{{ post.title }}</span>
+            <span class="post-user">por {{ post.user.username }}</span>
+        </div>
+        <div class="post-content">{{ post.content }}</div>
 
         <div class="comments">
             <h4>Comentarios</h4>
@@ -24,7 +30,7 @@
                     <li>No hay comentarios aún.</li>
                 {% endfor %}
             </ul>
-            <form action="/posts/{{ post.id }}/comments" method="POST">
+            <form class="comment-form" action="/posts/{{ post.id }}/comments" method="POST">
                 <textarea name="content" placeholder="Escribe un comentario..." required></textarea>
                 <button type="submit">Comentar</button>
             </form>
