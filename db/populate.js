@@ -29,14 +29,13 @@ const populateBoards = async () => {
 }
 
 const populatePosts = async () => {
-    const posts = [ "hola", "adios", "buenas tardes"]
+    const posts = [
+        { title: "hola", content: "contenido", boardId: 1, userId: 1 },
+        { title: "primer post sports", content: "¡Bienvenidos a deportes!", boardId: 2, userId: 2 },
+        { title: "primer post tech", content: "¡Bienvenidos a tecnología!", boardId: 3, userId: 3 }
+    ];
     for (const post of posts) {
-        await Post.create({
-            title: post,
-            content: "contenido",
-            boardId: 1,
-            userId: 1
-        })
+        await Post.create(post);
     }
 }
 

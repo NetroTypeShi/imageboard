@@ -47,6 +47,15 @@ router.get("/posts", async (req, res) => {
     });
 });
 
+router.post("/boards/:id/posts", isAuthenticated, async (req, res) => {
+    const boardId = req.params.id;
+    const { title, content } = req.body;
+    const userId = req.session.userId;
+    await Post.create({ title, content, boardId, userId });
+    res.redirect(`/boards/${boardId}`);
+});
+
+
 router.get("/boards/:id", isAuthenticated, async (req, res) => {
     const id = req.params.id;
     const board = await Board.findByPk(id);
@@ -76,4 +85,15 @@ router.get("/boards/:id", isAuthenticated, async (req, res) => {
     console.log(posts);
     res.render("board", {board, posts, boards})
 })
+
+router.post("/posts/:id/comments", isAuthenticated, async (req, res) => {
+    const postId = req.params.id;
+    const { content } = req.body;
+    const userId = req.session.userId;
+    await Comment.create({ content, postId, userId });
+    // Obtener el boardId para redirigir correctamente
+    const post = await Post.findByPk(postId);
+    res.redirect(`/boards/${post.boardId}`);
+});
+
 export default router;

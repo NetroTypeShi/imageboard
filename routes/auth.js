@@ -25,7 +25,7 @@ router.get("/logout", (req, res) => {
             console.error(err);
             return res.status(500).json({ error: "Error al cerrar sesion"})
         }
-        res.redirect("/");
+        res.redirect("/register");
     });
 });
 

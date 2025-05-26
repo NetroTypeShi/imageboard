@@ -1,3 +1,12 @@
+{% if board %}
+    <h2>{{ board.name }}</h2>
+    <form action="/boards/{{ board.id }}/posts" method="POST">
+        <input type="text" name="title" placeholder="Título del post" required>
+        <textarea name="content" placeholder="Contenido" required></textarea>
+        <button type="submit">Crear post</button>
+    </form>
+{% endif %}
+
 {% for post in posts %}
     <div class="post">
         <p><strong>{{ post.title }}</strong></p>
